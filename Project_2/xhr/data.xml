@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipients>
+	<recipient>
+		<lName>Gilbert</lName>
+		<fName>Denise</fName>
+		<bDay>2012-03-14</bDay>
+		<topSize>Medium</topSize>
+		<bottomSize>10</bottomSize>
+		<shoeSize>8.5</shoeSize>
+		<ringSize>5</ringSize>
+		<fColor>Blue</fColor>
+
+	</recipient>
+
+	<recipient>
+		<lName>Gilbert</lName>
+		<fName>Jamie</fName>
+		<bDay>1981-05-10</bDay>
+		<topSize>X-Large</topSize>
+		<bottomSize>16</bottomSize>
+		<shoeSize>8</shoeSize>
+		<ringSize>7</ringSize>
+		<fColor>Pink</fColor>
+
+	</recipient>
+</recipients>
