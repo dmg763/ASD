@@ -1,0 +1,81 @@
+{
+	"recipients":[
+	{
+		"lName": 	["Gilbert"],
+		"fName": 	["Denise"],
+		"bDay":		["2012-03-14"],
+		"topSize": 		["Medium"],
+		"bottomSize":	["10"],
+		"shoeSize":			["8.5"],
+		"ringSize":		["5"],
+		"fColor":		["Blue"]		
+
+	},
+	{
+		"lName": 	["Gilbert"],
+		"fName": 	["Jamie"],
+		"bDay":		["1981-05-10"],
+		"topSize": 		["X-Large"],
+		"bottomSize":	["16"],
+		"shoeSize":			["8"],
+		"ringSize":		["8"],
+		"fColor":		["Pink"]
+	},
+
+	{
+		"lName": 	["Gilbert"],
+		"fName": 	["Stephen, Jr."],
+		"bDay":		["1983-06-05"],
+		"topSize": 		["Large"],
+		"bottomSize":	["30/31"],
+		"shoeSize":			["10.5"],
+		"ringSize":		["NA"],
+		"fColor":		["White"]
+	},			
+
+	{
+		"lName": 	["Gilbert"],
+		"fName": 	["Damian"],
+		"bDay":		["2001-07-29"],
+		"topSize": 		["Medium"],
+		"bottomSize":	["Not Sure"],
+		"shoeSize":			["8"],
+		"ringSize":		["NA"],
+		"fColor":		["Blue"]
+	},			
+
+	{
+		"lName": 	["Edwards"],
+		"fName": 	["Scottie, Jr."],
+		"bDay":		["2006-08-22"],
+		"topSize": 		["Medium"],
+		"bottomSize":	["8"],
+		"shoeSize":			["13"],
+		"ringSize":		["NA"],
+		"fColor":		["Green"]
+	},			
+
+	{
+		"lName": 	["Magiera"],
+		"fName": 	["David"],
+		"bDay":		["1965-08-04"],
+		"topSize": 		["Dress-16/Medium"],
+		"bottomSize":	["33/32"],
+		"shoeSize":			["10 Wide"],
+		"ringSize":		["NA"],
+		"fColor":		["Maroon"]
+	},			
+
+	{
+		"lName": 	["Smith"],
+		"fName": 	["Darlene"],
+		"bDay":		["2012-07-20"],
+		"topSize": 		["Small"],
+		"bottomSize":	["4"],
+		"shoeSize":			["7"],
+		"ringSize":		["5"],
+		"fColor":		["Not Sure"]
+	}
+
+]		
+}
