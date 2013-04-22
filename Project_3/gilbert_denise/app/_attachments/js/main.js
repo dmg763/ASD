@@ -84,9 +84,7 @@ $('#addRecipient').on('pageinit', function () {
 	};
 });
 
-$("#saveRecipientButton").on("click", storeData($(this).data('key')));
-
-$("#saveRecipientButton").off("click");
+$("#saveRecipientButton").on("click", storeData);
 
 // DISPLAY LOCAL STORAGE
 
@@ -109,7 +107,7 @@ var displayData = function () {
 				"data-theme": "b",
 				"data-ajax": "false",
 				"data-inline": "true",
-				"key": key
+				"data-key": key
 			})
 			.html("Edit Record")
 			.appendTo(makeParagraph),
@@ -172,7 +170,7 @@ var displayData = function () {
 // EDIT RECORD
 
 var editRecord =  function (key) {
-				var value = localStorage.getItem(this.key),
+				var value = localStorage.getItem($(this).data('key')),
 			item = $.parseJSON(value);
 				$('#fname').val(item.fname[1]);
 				$('#lname').val(item.lname[1]);
@@ -192,11 +190,15 @@ var editRecord =  function (key) {
 				$('#restaurants').val(item.restaurants[1]);
 			
 				$('#saveRecipientButton').val("Edit Recipient");
-
-				storeData(this.key);
-				alert("Recipient Changes Saved!");
-				$.mobile.changePage("#home");
-				return false;
+				
+				$("#saveRecipientButton").off();
+	
+				$('#saveRecipientButton').on("click", function () {
+					$("#saveRecipientButton").key = this.key;
+					alert("Recipient Changes Saved!");
+					$.mobile.changePage("#home");
+					return false;
+				});
 			};
 
 // DELETE RECORD
@@ -377,5 +379,3 @@ $('.zodiacSignsButton').on("click", function () {
 	});
 	alert("Loading Zodiac Signs Info");
 });
-
-
