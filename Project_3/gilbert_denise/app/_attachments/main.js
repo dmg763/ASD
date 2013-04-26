@@ -1,13 +1,12 @@
 /* Denise M. Gilbert
 ASD Term 1304
-Project 2
-April 18, 2013
+Project 3
+April 25, 2013
 main.js Page*/
 
 // GLOBAL VARIABLES
 
-var $,
-	storeData;
+var storeData;
 
 // HOME PAGE
 
@@ -78,7 +77,7 @@ $('#addRecipient').on('pageinit', function () {
 	
 		// Use Stringify to Convert the Recipient Object to a String
 		localStorage.setItem(recipientId, JSON.stringify(recipient));
-		console.log("Saved item to storage with recipientId = " + recipientId);
+		console.log("Saved item to storage with Key = " + recipientId);
 		alert("Recipient Information is Saved!");
 
 	};
@@ -86,7 +85,54 @@ $('#addRecipient').on('pageinit', function () {
 
 $("#saveRecipientButton").on("click", storeData);
 
-$("#saveRecipientButton").off("click");
+// EDIT RECORD
+
+var editRecord =  function (key) {
+				var value = localStorage.getItem($(this).data('key')),
+			item = $.parseJSON(value);
+			$('#fname').val(item.fname[1]);
+			$('#lname').val(item.lname[1]);
+			$('#address1').val(item.address1[1]);
+			$('#address2').val(item.address2[1]);
+			$('#city').val(item.city[1]);
+			$('#state').val(item.state[1]);
+			$('#zipCode').val(item.zipCode[1]);
+			$('#bday').val(item.bday[1]);
+			$('#sunSign').val(item.sunSign[1]);
+			$('#clothing').val(item.clothing[1]);
+			$('#footwear').val(item.footwear[1]);
+			$('#jewelry').val(item.jewelry[1]);
+			$('#colors').val(item.colors[1]);
+			$('#flowers').val(item.flowers[1]);
+			$('#foods').val(item.foods[1]);
+			$('#restaurants').val(item.restaurants[1]);
+			
+			$('#saveRecipientButton').val("Edit Recipient");
+			
+			$("#saveRecipientButton").off();
+
+			$('#saveRecipientButton').on("click", function (key) {
+				$('#saveRecipientButton').key = this.key;
+				alert("Recipient Changes Saved!");
+				$.mobile.changePage("#home");
+				return false;
+			});
+		};
+			
+// DELETE RECORD
+
+var deleteRecord =  function (key) {
+				var confirmDelete = confirm("Are you sure you want to DELETE this recipient?");
+				if (confirmDelete === true) {
+					localStorage.removeItem($(this).data('key'));
+					alert("Recipient Record Deleted");
+					$.mobile.changePage("#home");
+					return false;
+	
+				} else {
+					alert("Recipient was NOT deleted!");
+				}
+			};
 
 // DISPLAY LOCAL STORAGE
 
@@ -109,7 +155,7 @@ var displayData = function () {
 				"data-theme": "b",
 				"data-ajax": "false",
 				"data-inline": "true",
-				"key": key
+				"data-key": key
 			})
 			.html("Edit Record")
 			.appendTo(makeParagraph),
@@ -154,8 +200,8 @@ var displayData = function () {
 					 "<td>" + recipient.restaurants[1]  + "</td>" + "</tr>" +
 					 "<td>" + "Wish List Item(s):" + "</td>"),
 		makeLink = $("<a href='#' id=tableLinks'" + key + "'>Edit</a>");
-			makeLink.on('click', function () {
-                console.log("This is my key: " + this.id);
+        makeLink.on('click', function () {
+                console.log("This is my Key: " + this.id);
             });
 			makeLink.html(makeSubLi);
 			makeSubList.append(makeLink).appendTo("#showAll");
@@ -168,51 +214,6 @@ var displayData = function () {
 			
 	}
 };
-
-// EDIT RECORD
-
-var editRecord =  function (key) {
-				var value = localStorage.getItem(this.key),
-			item = $.parseJSON(value);
-				$('#fname').val(item.fname[1]);
-				$('#lname').val(item.lname[1]);
-				$('#address1').val(item.address1[1]);
-				$('#address2').val(item.address2[1]);
-				$('#city').val(item.city[1]);
-				$('#state').val(item.state[1]);
-				$('#zipCode').val(item.zipCode[1]);
-				$('#bday').val(item.bday[1]);
-				$('#sunSign').val(item.sunSign[1]);
-				$('#clothing').val(item.clothing[1]);
-				$('#footwear').val(item.footwear[1]);
-				$('#jewelry').val(item.jewelry[1]);
-				$('#colors').val(item.colors[1]);
-				$('#flowers').val(item.flowers[1]);
-				$('#foods').val(item.foods[1]);
-				$('#restaurants').val(item.restaurants[1]);
-			
-				$('#saveRecipientButton').val("Edit Recipient");
-
-				storeData(this.key);
-				alert("Recipient Changes Saved!");
-				$.mobile.changePage("#home");
-				return false;
-			};
-
-// DELETE RECORD
-
-var deleteRecord =  function (key) {
-				var confirmDelete = confirm("Are you sure you want to DELETE this recipient?");
-				if (confirmDelete === true) {
-					localStorage.removeItem($(this).data('key'));
-					alert("Recipient Record Deleted");
-					$.mobile.changePage("#home");
-					return false;
-	
-				} else {
-					alert("Recipient was NOT deleted!");
-				}
-			};
 
 // CLEAR LOCAL STORAGE
 	
@@ -232,72 +233,47 @@ $('#deleteAllButton').on("click", function () {
 
 $('#jsonButton').on("click", function () {
 
-		$.ajax({
-			url:		'xhr/data2.json',
-			type:		'GET',
-			dataType:	'json',
-			success:	function (response) {
-				for (var i in response.recipients) {
-					var recipients = response.recipients[i];
-
-					$('<ul data-role="listview">' + 
-						'<li>' +
-						'<p><strong>' + recipients.lName + ', ' + recipients.fName + '</strong></p>' +
-						'<p>' + "Birthday: " + recipients.bDay + '</p>' +
-						'<p>' + "Top Size: " + recipients.topSize + '</p>' +
-						'<p>' + "Bottom Size: " + recipients.bottomSize + '</p>' +
-						'<p>' + "Shoe Size: " + recipients.shoeSize + '</p>' +
-						'<p>' + "Ring Size: " + recipients.ringSize + '</p>' +
-						'<p>' + "Favorite Color: " + recipients.fColor + '</p>' + 
-						'</li>' + '</ul>').appendTo('#jsonPage');
-				}
-			}
-
-		});
-		alert("Loading JSON Data");
-
-	});
-
-//  SHOW CSV DUMMY DATA
-
-$('#csvButton').on("click", function () {
-
 	$.ajax({
-		url:		'xhr/data2.csv',
+		url:		'_view/recipients',
 		type:		'GET',
-		dataType:	'text',
-		success:	function (response) {
-			var csv = response.split(/\r\n|\n/),
-				formatCSV = csv[0].split('|'),
-				type = [];
-			for (var i = 1; i < csv.length; i += 1) {
-				var data = csv[i].split('|');
-				if (data.length === formatCSV.length) {
-					var recipients = [];
-					for (var j = 0; j < formatCSV.length; j += 1) {
-						recipients.push(data[j]);
-					}
-					type.push(recipients);
-				}
-			}
-			for (var k = 0; k < type.length; k += 1) {
-				var recipient = type[k];	
+		dataType:	'json',
+		success:	function (data) {
+			$.each(data.rows, function (index, value) {
+				var lname = value.value.lname;
+				var fname = value.value.fname;
+				var address1 = value.value.address1;
+				var address2 = value.value.address2;
+				var city = value.value.city;
+				var state = value.value.state;
+				var zipCode = value.value.zipCode;
+				var bday = value.value.bday;
+				var sunSign = value.value.sunSign;
+					
+				$("#recipientList").append(
+					$("<li>").append(
+						$("<a>").attr("href", "#")
+								.text(lname + ", " + fname)
+					),
+					$("<li>").append(
+						$("<li>").text(address1 + ", " + address2)
+					),
+					$("<li>").append(
+						$("<li>").text(city + ", " + state + "  " + zipCode)
+					),
+					$("<li>").append(
+						$("<li>").text("Birthday:  " + bday)
+					),
+					$("<li>").append(
+						$("<li>").text("Zodiac Sign:  " + sunSign)
+					)
+				);
 
-				$('<div data-role="content">' + '<ul data-role="listview">' + 
-						'<li>' +
-						'<p><strong>' + recipient[0] + ', ' + recipient[1] + '</strong></p>' +
-						'<p>' + "Birthday: " + recipient[2] + '</p>' +
-						'<p>' + "Top Size: " + recipient[3] + '</p>' +
-						'<p>' + "Bottom Size: " + recipient[4] + '</p>' +
-						'<p>' + "Shoe Size: " + recipient[5] + '</p>' +
-						'<p>' + "Ring Size: " + recipient[6] + '</p>' +
-						'<p>' + "Favorite Color: " + recipient[7] + '</p>' + 
-						'</li>' + '</ul>' + '</div>').appendTo('#csv');
-			}
+			});
+			
+			$("#recipientList").listview("refresh");
+			alert("Loading JSON Data");
 		}
-
 	});
-	alert("Loading CSV Data");
 });
 
 
@@ -318,7 +294,7 @@ $(".showAllButton").on("click", function () {
 $('.jsonLink').on("click", function () {
 
 		$.ajax({
-			url:		'xhr/data.json',
+			url:		'data.json',
 			type:		'GET',
 			dataType:	'json',
 			success:	function (response) {
@@ -344,7 +320,7 @@ $('.jsonLink').on("click", function () {
 $('.zodiacSignsButton').on("click", function () {
 
 	$.ajax({
-		url:		'xhr/data.csv',
+		url:		'data.csv',
 		type:		'GET',
 		dataType:	'text',
 		success:	function (response) {
@@ -377,5 +353,3 @@ $('.zodiacSignsButton').on("click", function () {
 	});
 	alert("Loading Zodiac Signs Info");
 });
-
-
