@@ -5,14 +5,14 @@
 		"fName": 	["Denise"],
 		"giftDate":		["March 14"],
 		"giftType":  ["Birthday"],
-		"image":	["img/cake.png"]
+		"image":	["cake.png"]
 	},
 	{
 		"lName": 	["Gilbert"],
 		"fName": 	["Jamie"],
 		"giftDate":		["May 10"],
 		"giftType":  ["Anniversary"],
-		"image":	["img/weddingRings.png"]
+		"image":	["weddingRings.png"]
 	},
 
 	{
@@ -20,7 +20,7 @@
 		"fName": 	["Stephen, Jr."],
 		"giftDate":		["June 5"],
 		"giftType":  ["Graduation"],
-		"image":	["img/graduation.png"]
+		"image":	["graduation.png"]
 	},			
 
 	{
@@ -28,7 +28,7 @@
 		"fName": 	["Damian"],
 		"giftDate":		["July 29"],
 		"giftType":  ["Birthday"],
-		"image":	["img/cake.png"]
+		"image":	["cake.png"]
 	},			
 
 	{
@@ -36,7 +36,7 @@
 		"fName": 	["Scottie, Jr."],
 		"giftDate":		["August 22"],
 		"giftType":  ["Anniversary"],
-		"image":	["img/weddingRings.png"]
+		"image":	["weddingRings.png"]
 	},			
 
 	{
@@ -44,7 +44,7 @@
 		"fName": 	["David"],
 		"giftDate":		["August 4"],
 		"giftType":  ["Graduation"],
-		"image":	["img/graduation.png"]
+		"image":	["graduation.png"]
 	},			
 
 	{
@@ -52,7 +52,7 @@
 		"fName": 	["Darlene"],
 		"giftDate":		["July 20"],
 		"giftType":  ["Birthday"],
-		"image":	["img/cake.png"]
+		"image":	["cake.png"]
 	}
 
 ]		
