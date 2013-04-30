@@ -353,3 +353,108 @@ $('.zodiacSignsButton').on("click", function () {
 	});
 	alert("Loading Zodiac Signs Info");
 });
+
+// FAVORITE GIFTS PAGE
+
+$(".favoriteGiftsButton").on('click', function () {
+	$.couch.db("gilbert_denise").view("gilbert_denise/favoriteGifts", {
+		success: function(data) {
+			console.log(data);
+			$("favoriteGiftList").empty();
+			$.each(data.rows, function (index, value) {
+				var item = (value.value || value.doc);
+				$("#favoriteGiftList").append(
+					$("<li>").append(
+						$("<a>").attr("href", "gift.html?giftId=" + item.id)
+								.text(item.giftName)
+					)
+				);
+
+			});
+			
+			$("#favoriteGiftList").listview("refresh");
+		}
+	});
+});
+
+// GET FAVORITE GIFT ID
+
+var urlVars = function () {
+var urlData = $(giftDetails).data("url"); 
+var urlParts = urlData.split("?");
+	var urlPairs = urlParts[1].split("&");
+	var urlValues = {};
+		for (var pair in urlPairs) {
+			var keyValue = urlPairs[pair].split("=");
+			var key = decodeURIComponent(keyValue[0]);
+			var value = decodeURIComponent(keyValue[1]);
+			urlValues[key] = value;
+		}
+		console.log(urlValues);
+		return urlValues;
+};
+
+$(document).on('pageinit', '#giftDetails', function () {
+	var favoriteGiftId = urlVars().giftId;
+	console.log(favoriteGiftId);
+	$.couch.db("gilbert_denise").view("gilbert_denise/giftDetails/favoriteGiftId", {
+    success: function(data) {
+        console.log(data);
+    },
+    error: function(status) {
+        console.log(status);
+    }
+	});
+});
+
+// GIFT DETAILS PAGE
+
+$(document).on('pageinit', '#giftDetails', function () {
+	$.couch.db("gilbert_denise").view("gilbert_denise/giftDetails", {
+		success: function(data) {
+			console.log(data);
+			$("giftItem").empty();
+			$.each(data.rows, function (index, value) {
+				//var item = (value.value || value.doc);
+				$("#giftItem").append(
+					$("<p>").append(
+						$("<p>").text("Gift Name:  " + value.value.giftName)
+					),
+					$("<p>").append(
+						$("<p>").text("Category:  " + value.value.category)
+					),
+					$("<p>").append(
+						$("<p>").text("Where to Buy:  " + value.value.whereToBuy)
+					),
+					$("<p>").append(
+						$("<p>").text("Cost:  $" + value.value.cost)
+					)
+				);
+
+			});
+			
+			// $("#giftItem").listview("refresh");
+		}
+	});
+});
+
+// SAVE FAVORITE GIFT
+
+$("#saveGiftButton").on('click', function () {
+
+	var doc = {};
+	
+	var category = $('.settingsForm input#category').val(),
+        giftName = $('.settingsForm input#giftName').val(),
+        whereToBuy = $('.settingsForm input#whereToBuy').val(),
+        cost = $('.settingsForm input#cost').val();
+        
+$.couch.db("gilbert_denise").saveDoc(doc, {
+    success: function(data) {
+        console.log(data);
+    },
+    error: function(status) {
+        console.log(status);
+    }
+});
+});

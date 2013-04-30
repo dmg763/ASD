@@ -83,6 +83,21 @@ label.error {
 	border-color: #581E59;
 }
 
+#favoriteGiftsPage .ui-btn-a {
+	background: #772B8C;
+	border-color: #772B8C;
+	color: white;
+	
+	text-shadow: none;
+	
+}
+
+#favoriteGiftsPage a {
+	color: white;
+	text-shadow: none;
+	
+}
+
 .ui-footer {
 	background: #581E59;
 	border-color: #581E59;
