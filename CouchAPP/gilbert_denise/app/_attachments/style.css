@@ -1,7 +1,7 @@
 /* Denise M. Gilbert
 ASD Term 1304
-Project 2
-April 18, 2013
+Project 4
+May 2, 2013
 style.css Page*/
 
 header {
@@ -12,6 +12,11 @@ header {
 	background: #581E59;
 	border-color: #581E59;
 	padding-top: 5px;
+}
+
+.ui-footer {
+	background: #581E59;
+	border-color: #581E59;
 }
 
 h1 {
@@ -73,7 +78,7 @@ label.error {
 
 .ui-btn {
 	background: #772B8C;
-	border-color: #581E59;
+	border-color: #772B8C;
 	color: white;
 	text-shadow: none;
 }
@@ -82,6 +87,35 @@ label.error {
 	background: #581E59;
 	border-color: #581E59;
 }
+
+#favoriteGiftsPage .ui-btn {
+	background: #772B8C;
+	border-color: #772B8C;
+	color: white;
+	text-shadow: none;
+}
+
+#favoriteGiftsPage .ui-btn-a {
+	background: #581E59;
+	border-color: #581E59;
+	color: white;
+	text-shadow: none;
+	
+}
+
+#favoriteGiftsPage a {
+	color: white;
+	text-shadow: none;
+	
+}
+
+#giftDetails p {
+	margin-left: 10px;
+};
+
+#type {
+    color: #AAAAAA;
+};
 
 .ui-footer {
 	background: #581E59;
@@ -102,7 +136,7 @@ label.error {
 
 #zodiacSignsPage .ui-btn-active {
 	background: #772B8C;
-	border-color: #581E59;
+	border-color: #772B8C;
 	color: white;
 	text-shadow: none;
 	
@@ -151,7 +185,7 @@ label.error {
 
 #addRecipient .ui-btn-active {
 	background: #772B8C;
-	border-color: #581E59;
+	border-color: #772B8C;
 	color: white;
 	text-shadow: none;
 	

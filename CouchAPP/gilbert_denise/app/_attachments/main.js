@@ -90,34 +90,34 @@ $("#saveRecipientButton").on("click", storeData);
 var editRecord =  function (key) {
 				var value = localStorage.getItem($(this).data('key')),
 			item = $.parseJSON(value);
-			$('#fname').val(item.fname[1]);
-			$('#lname').val(item.lname[1]);
-			$('#address1').val(item.address1[1]);
-			$('#address2').val(item.address2[1]);
-			$('#city').val(item.city[1]);
-			$('#state').val(item.state[1]);
-			$('#zipCode').val(item.zipCode[1]);
-			$('#bday').val(item.bday[1]);
-			$('#sunSign').val(item.sunSign[1]);
-			$('#clothing').val(item.clothing[1]);
-			$('#footwear').val(item.footwear[1]);
-			$('#jewelry').val(item.jewelry[1]);
-			$('#colors').val(item.colors[1]);
-			$('#flowers').val(item.flowers[1]);
-			$('#foods').val(item.foods[1]);
-			$('#restaurants').val(item.restaurants[1]);
-			
-			$('#saveRecipientButton').val("Edit Recipient");
-			
-			$("#saveRecipientButton").off();
+				$('#fname').val(item.fname[1]);
+				$('#lname').val(item.lname[1]);
+				$('#address1').val(item.address1[1]);
+				$('#address2').val(item.address2[1]);
+				$('#city').val(item.city[1]);
+				$('#state').val(item.state[1]);
+				$('#zipCode').val(item.zipCode[1]);
+				$('#bday').val(item.bday[1]);
+				$('#sunSign').val(item.sunSign[1]);
+				$('#clothing').val(item.clothing[1]);
+				$('#footwear').val(item.footwear[1]);
+				$('#jewelry').val(item.jewelry[1]);
+				$('#colors').val(item.colors[1]);
+				$('#flowers').val(item.flowers[1]);
+				$('#foods').val(item.foods[1]);
+				$('#restaurants').val(item.restaurants[1]);
+				
+				$('#saveRecipientButton').val("Edit Recipient");
+				
+				$("#saveRecipientButton").off();
 
-			$('#saveRecipientButton').on("click", function (key) {
-				$('#saveRecipientButton').key = this.key;
-				alert("Recipient Changes Saved!");
-				$.mobile.changePage("#home");
-				return false;
-			});
-		};
+				$('#saveRecipientButton').on("click", function (key) {
+					$('#saveRecipientButton').key = this.key;
+					alert("Recipient Changes Saved!");
+					$.mobile.changePage("#home");
+					return false;
+				});
+			};
 			
 // DELETE RECORD
 
@@ -200,7 +200,7 @@ var displayData = function () {
 					 "<td>" + recipient.restaurants[1]  + "</td>" + "</tr>" +
 					 "<td>" + "Wish List Item(s):" + "</td>"),
 		makeLink = $("<a href='#' id=tableLinks'" + key + "'>Edit</a>");
-        makeLink.on('click', function () {
+			makeLink.on('click', function () {
                 console.log("This is my Key: " + this.id);
             });
 			makeLink.html(makeSubLi);
@@ -239,15 +239,15 @@ $('#jsonButton').on("click", function () {
 		dataType:	'json',
 		success:	function (data) {
 			$.each(data.rows, function (index, value) {
-				var lname = value.value.lname;
-				var fname = value.value.fname;
-				var address1 = value.value.address1;
-				var address2 = value.value.address2;
-				var city = value.value.city;
-				var state = value.value.state;
-				var zipCode = value.value.zipCode;
-				var bday = value.value.bday;
-				var sunSign = value.value.sunSign;
+				var lname = value.value.lname,
+					fname = value.value.fname,
+					address1 = value.value.address1,
+					address2 = value.value.address2,
+					city = value.value.city,
+					state = value.value.state,
+					zipCode = value.value.zipCode,
+					bday = value.value.bday,
+					sunSign = value.value.sunSign;
 					
 				$("#recipientList").append(
 					$("<li>").append(
@@ -354,86 +354,28 @@ $('.zodiacSignsButton').on("click", function () {
 	alert("Loading Zodiac Signs Info");
 });
 
+//////////////////////////////////////////////////////////// COUCH APP PAGES //////////////////////////////////////////////////////////////
+
 // FAVORITE GIFTS PAGE
 
 $(".favoriteGiftsButton").on('click', function () {
 	$.couch.db("gilbert_denise").view("gilbert_denise/favoriteGifts", {
-		success: function(data) {
+		success: function (data) {
 			console.log(data);
 			$("favoriteGiftList").empty();
 			$.each(data.rows, function (index, value) {
+				var docId = value.value.key;
+				var docRev = value.value.rev;
 				var item = (value.value || value.doc);
 				$("#favoriteGiftList").append(
 					$("<li>").append(
-						$("<a>").attr("href", "gift.html?giftId=" + item.id)
+						$("<a>").attr("href", "gift.html?favoriteGifts=" + docId + "&docRev=" + docRev)
 								.text(item.giftName)
 					)
 				);
 
 			});
-			
 			$("#favoriteGiftList").listview("refresh");
-		}
-	});
-});
-
-// GET FAVORITE GIFT ID
-
-var urlVars = function () {
-var urlData = $(giftDetails).data("url"); 
-var urlParts = urlData.split("?");
-	var urlPairs = urlParts[1].split("&");
-	var urlValues = {};
-		for (var pair in urlPairs) {
-			var keyValue = urlPairs[pair].split("=");
-			var key = decodeURIComponent(keyValue[0]);
-			var value = decodeURIComponent(keyValue[1]);
-			urlValues[key] = value;
-		}
-		console.log(urlValues);
-		return urlValues;
-};
-
-$(document).on('pageinit', '#giftDetails', function () {
-	var favoriteGiftId = urlVars().giftId;
-	console.log(favoriteGiftId);
-	$.couch.db("gilbert_denise").view("gilbert_denise/giftDetails/favoriteGiftId", {
-    success: function(data) {
-        console.log(data);
-    },
-    error: function(status) {
-        console.log(status);
-    }
-	});
-});
-
-// GIFT DETAILS PAGE
-
-$(document).on('pageinit', '#giftDetails', function () {
-	$.couch.db("gilbert_denise").view("gilbert_denise/giftDetails", {
-		success: function(data) {
-			console.log(data);
-			$("giftItem").empty();
-			$.each(data.rows, function (index, value) {
-				//var item = (value.value || value.doc);
-				$("#giftItem").append(
-					$("<p>").append(
-						$("<p>").text("Gift Name:  " + value.value.giftName)
-					),
-					$("<p>").append(
-						$("<p>").text("Category:  " + value.value.category)
-					),
-					$("<p>").append(
-						$("<p>").text("Where to Buy:  " + value.value.whereToBuy)
-					),
-					$("<p>").append(
-						$("<p>").text("Cost:  $" + value.value.cost)
-					)
-				);
-
-			});
-			
-			// $("#giftItem").listview("refresh");
 		}
 	});
 });
@@ -441,20 +383,131 @@ $(document).on('pageinit', '#giftDetails', function () {
 // SAVE FAVORITE GIFT
 
 $("#saveGiftButton").on('click', function () {
-
-	var doc = {};
-	
-	var category = $('.settingsForm input#category').val(),
-        giftName = $('.settingsForm input#giftName').val(),
-        whereToBuy = $('.settingsForm input#whereToBuy').val(),
-        cost = $('.settingsForm input#cost').val();
-        
-$.couch.db("gilbert_denise").saveDoc(doc, {
-    success: function(data) {
-        console.log(data);
-    },
-    error: function(status) {
-        console.log(status);
-    }
+	var giftItem = {};
+	giftItem.giftName = $("#giftName").val();
+	giftItem.category = $("#category").val();
+	giftItem.whereToBuy = $("#whereToBuy").val();
+	giftItem.cost = $("#cost").val();
+	giftItem.type = $("#type").val();
+	$.couch.db("gilbert_denise").saveDoc(
+		{
+			giftName: giftItem.giftName,
+			category: giftItem.category,
+			whereToBuy: giftItem.whereToBuy,
+			cost: giftItem.cost,
+			type: giftItem.type
+		},
+		{
+			success: function (data) {
+				console.log(data);
+				alert("Favorite Gift Item Saved!");
+				$.mobile.changePage("#home");
+			}
+		});
 });
+
+// DISPLAY FAVORITE GIFT ITEM DETAILS
+
+$(document).on('pageinit', '#giftDetails', function () {
+	var urlVars = function () {
+			var urlData = $(giftDetails).data("url");
+			console.log(urlData);
+			var urlParts = urlData.split('?');
+			console.log(urlParts);
+			var urlPairs = urlParts[1].split('&');
+			console.log(urlPairs);
+			var urlValues = {};
+			for (var pair in urlPairs) {
+				var keyValue = urlPairs[pair].split('=');
+				console.log(keyValue);
+				var key = decodeURIComponent(keyValue[0]);
+				console.log(key);
+				var value = decodeURIComponent(keyValue[1]);
+				console.log(value);
+				urlValues[key] = value;
+				console.log(urlValues[key]);
+			}
+			return urlValues;	
+		};
+	var giftKey = urlVars().favoriteGifts;
+	var giftRev = urlVars().docRev;
+	$.couch.db("gilbert_denise").openDoc(giftKey, {
+			success: function (data) {
+						$('<section data-role="content">' +
+						'<p>' + "<strong>&nbsp;&nbsp;Gift Name:  </strong>" + data.giftName + '</p>' +
+						'<p>' + "<strong>&nbsp;&nbsp;Category:  </strong>" + data.category + '</p>' +
+						'<p>' + "<strong>&nbsp;&nbsp;Where to Buy:  </strong>" + data.whereToBuy + '</p>' +
+						'<p>' + "<strong>&nbsp;&nbsp;Cost:  </strong>$" + data.cost + '</p>' +
+						'</section>').appendTo('#giftDetails');
+					},
+			error: function (status) {
+								console.log(status);
+							}
+		});
+					
+// EDIT FAVORITE GIFT
+
+	$("#editGiftItemButton").on("click", function () {
+				$.mobile.changePage('editGift.html');
+				$.couch.db("gilbert_denise").openDoc(giftKey, {
+					success: function (data) {
+						$('#editGiftName').val(data.giftName);
+						$('#editCategory').val(data.category);
+						$('#editWhereToBuy').val(data.whereToBuy);
+						$('#editCost').val(data.cost);
+						$('#editType').val(data.type);
+					}
+				});
+				
+			});
+
+	$(document).on('pageinit', '#editGift', function () {
+				$("#editGiftButton").on("click", function () {
+					var doc = {
+							_id: giftKey,
+    						_rev: giftRev,
+							giftName: editGiftName.value,
+							category: editCategory.value,
+							whereToBuy: editWhereToBuy.value,
+							cost: editCost.value,
+							type: editType.value
+						};
+					$.couch.db("gilbert_denise").saveDoc(doc, {
+						success: function (data) {
+							alert("Gift Changes Have Been Saved!");
+							console.log(data);
+							$.mobile.changePage("index.html");
+						},
+						error: function (status) {
+							console.log(status);
+						}
+					});
+					
+				});
+				
+			});
+					
+// DELETE FAVORITE GIFT
+					
+	$("#deleteGiftItemButton").on("click", function () {
+				var confirmDelete = confirm("Are you sure you want to DELETE this gift?");
+				if (confirmDelete === true) {
+					
+					$.couch.db("gilbert_denise").removeDoc({
+						_id: giftKey,
+						_rev: giftRev
+					}, {
+						success: function (data) {
+							alert("Gift has been DELETED!");
+							$.mobile.changePage("index.html");
+						},
+						error: function (status) {
+							console.log(status);
+						}
+					});
+				} else {
+					alert("Gift was NOT deleted!");
+					$.mobile.changePage("index.html");
+				}
+			});
 });

@@ -5,7 +5,8 @@ function(doc) {
     "giftName": doc.giftName,
     "whereToBuy": doc.whereToBuy,
     "cost": doc.cost,
-    "id": doc._id
+    "key": doc._id,
+	"rev": doc._rev
     });
   }
 };

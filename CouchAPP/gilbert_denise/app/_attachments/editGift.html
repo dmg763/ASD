@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+    
+<!-- Denise M. Gilbert
+ASD Term 1304
+Project 4
+May 2, 2013
+index.html -->
+	
+<html lang="en">
+    
+<head>
+
+	<meta charset="utf-8">
+	
+	<title>Gift Details</title>
+
+</head>
+
+<body>
+	
+	<!-- EDIT FAVORITE GIFT MODAL PANEL -->
+	
+	<section data-role="dialog" id="editGift" data-theme="c">
+		
+	    <header data-role="header" data-position="fixed">
+			<h1>Edit Favorite Gift</h1>
+	    </header>
+	    
+	    <article data-role="content">
+			
+			<form action="#" method="post" id="editGiftForm">
+			
+				<ul data-role="listview">
+				
+						<li data-role="fieldcontain">
+							<label for="editCategory"><strong>Category:</strong></label>
+							<input type="text" name="editCategory" id="editCategory"/>
+						</li>
+					
+						<li data-role="fieldcontain">
+							<label for="editGiftName"><strong>Gift Name:</strong></label>
+							<input type="text" name="editGiftName" id="editGiftName"/>
+						</li>
+						
+						<li data-role="fieldcontain">
+							<label for="editWhereToBuy"><strong>Where to Buy:</strong></label>
+							<input type="text" name="editWhereToBuy" id="editWhereToBuy"/>
+						</li>
+						
+						<li data-role="fieldcontain">
+							<label for="editCost"><strong>Price:</strong></label>
+							<input type="text" name="editCost" id="editCost"/>
+						</li>
+						
+						<li data-role="fieldcontain">
+							<label for="editType"><strong>List Category:</strong></label>
+							<input type="text" name="editType" id="editType" value="favoriteGifts" readonly="readonly"/>
+						</li>
+					
+					</ul>
+					
+				<!-- Save and Reset Buttons -->
+					<footer>
+						<input type="reset" value="Reset" id="resetEditGift" data-inline="true"/>
+						<input type="submit" value="Edit Gift" id="editGiftButton" data-inline="true" data-icon="check"/>
+					</footer>
+			
+			</form>
+			
+	    </article>
+		
+	</section>
+	
+</body>
+
+</html>
